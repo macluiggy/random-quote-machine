@@ -13,7 +13,6 @@ const FETCH_DATA = 'FETCH_DATA';
 const initialState = {
 	quote: '',
 	author: '',
-	id: ''
 }
 
 const reducer = (state=initialState, action) => {
@@ -22,7 +21,6 @@ const reducer = (state=initialState, action) => {
 			return {
 				quote: action.quote,
 				author: action.author,
-				id: action.id,
 			}
 		default:
 			return state;
@@ -35,13 +33,13 @@ const store = createStore(reducer);
 axios.get('http://quotes.stormconsultancy.co.uk/random.json')
 		.then(res => {
 			
-			const {quote, author, id} = res.data
-			console.log(quote)
-			store.dispatch({ type: FETCH_DATA, quote: quote, author: author, id: id})
+			const {quote, author} = res.data
+			//console.log(quote)
+			store.dispatch({ type: FETCH_DATA, quote: quote, author: author})
 		})
 //react
 const Comp = ({state, fetchNewQuote}) => {
-	const {quote, author, id} = state
+	const {quote, author} = state
 	const newQuote = () => fetchNewQuote()
 	return (
 		<header id='quote-box'>
@@ -53,7 +51,7 @@ const Comp = ({state, fetchNewQuote}) => {
 	      </div>
 	      <div className='buttons'>
 	        <button id='new-quote' onClick={newQuote} >New quote</button>
-	        <a href={`https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=hola%20mi`} id='tweet-quote'></a>
+	        <a href={`https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=hola%20mi`} id='tweet-quote'>twiter</a>
 	      </div>
 	    </header>
 		)
@@ -69,12 +67,11 @@ const mapDispatchToProps = dispatch => {
 		fetchNewQuote: async () => {
 			let res = await axios.get('http://quotes.stormconsultancy.co.uk/random.json');
 			let data = await res.data
-			const {author, quote, id} = data;
+			const {author, quote} = data;
 			dispatch({
 				type: FETCH_DATA,
 				author: author,
 				quote: quote,
-				id: id,
 			})
 		},
 	}
