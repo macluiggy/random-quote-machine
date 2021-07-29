@@ -1,6 +1,5 @@
 {
   "name": "random_quote_machine",
-  //"homepage": "https://macluiggy.github.io/random-quote-machine",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -22,8 +21,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    //"predeploy": "yarn build",
-    //"deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
